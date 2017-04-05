@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "renderarea.h"
 #include "neuronetwork.h"
-#include <QMouseEvent>
+
 
 namespace Ui {
 class MainWindow;
@@ -14,7 +14,7 @@ class MainWindow: public QMainWindow{
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void mouseReleaseEvent ( QMouseEvent * event );
+
     ~MainWindow();
 
 private:

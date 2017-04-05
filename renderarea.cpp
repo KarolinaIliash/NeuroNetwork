@@ -70,7 +70,7 @@ void RenderArea::drawElement(QPainter &p, int i, int j){
     if(c < 0) p.setBrush(Qt::white);
     else      p.setBrush(Qt::black);
 
-    p.drawRect(posX + i*esiz, posY + j*esiz, esiz, esiz);
+    p.drawRect(posX + j*esiz, posY + i*esiz, esiz, esiz);
 }
 
 void RenderArea::findRectangle(int mouseX, int mouseY, int& i, int& j){
@@ -78,6 +78,23 @@ void RenderArea::findRectangle(int mouseX, int mouseY, int& i, int& j){
     double esiz = siz/n;
     double posX = (width() -siz)/2;
     double posY = (height()-siz)/2;
-    i = floor((mouseX - posX) / esiz);
-    j = floor((mouseY - posY)/ esiz);
+    if(mouseX < posX || mouseX > posX + siz || mouseY < posY || mouseY > posY + siz){
+        i = -1; j = -1; return;
+    }
+    j = floor((mouseX - posX) / esiz);
+    i = floor((mouseY - posY)/ esiz);
 }
+
+void RenderArea::mouseReleaseEvent ( QMouseEvent * event )
+    {
+      int xM = event->x();
+      int yM = event->y();
+      int i, j;
+      findRectangle(xM, yM, i, j);
+      if(i != -1 && j != -1){
+      char c;
+      c = (getElement(i, j) == -1) ? 1 : -1;
+      setElement(i, j, c);
+      repaint();}
+    }
+

@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <vector>
 #include <cmath>
+#include <QMouseEvent>
 using namespace std;
 
 class RenderArea: public QWidget{
@@ -22,6 +23,7 @@ public:
     void setElement(int i, int j, char c);
     void findRectangle(int mouseX, int mouseY, int& i, int& j);
     void setim(vector<char> newx);
+     void mouseReleaseEvent ( QMouseEvent * event );
     vector<char> getim();
 
 private:
