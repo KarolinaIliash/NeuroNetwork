@@ -22,10 +22,11 @@ void MainWindow::mouseReleaseEvent ( QMouseEvent * event )
       int y = event->y();
       int i, j;
       renderArea->findRectangle(x, y, i, j);
+      if(i != -1 && j != -1){
       char c;
       c = (renderArea->getElement(i, j) == -1) ? 1 : -1;
       renderArea->setElement(i, j, c);
-      renderArea->repaint();
+      renderArea->repaint();}
     }
 
 
