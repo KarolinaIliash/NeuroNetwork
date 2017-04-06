@@ -21,7 +21,7 @@ public:
         vector<char> neuros;
         string name;
         void Read(string filename, int n, int m);
-        void Save(string filename, int n, int m);
+        bool Save(string filename, int n, int m);
     };
 private:
     vector<Image> images;
@@ -30,6 +30,9 @@ private:
     int M;//amount of images
 public:
     //NeuroNetwork(vector<Image> im): images(im) {}
+    NeuroNetwork(){
+        M = 0; N = 0;
+    }
     void LearnNeuroNet(const vector<Image>& images);
    // void RecognizeImage(const vector<neuroState>& neuros, vector<neuroState>& result);
      void RecognizeImage(const vector<char>& neuros, vector<char>& result);
@@ -39,6 +42,7 @@ public:
        char NeuronCalculate(const vector<char>& neuros, int i);
     //bool Step(vector<neuroState>& neuros);
        bool Step(vector<char>& neuros);
+       bool isLearnt();
 };
 
 #endif // NEURONETWORK_H

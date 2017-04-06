@@ -1,7 +1,7 @@
 #include "neuronetwork.h"
 #include <random>
 #include <algorithm>
-#include<fstream>
+#include <fstream>
 
 void NeuroNetwork::LearnNeuroNet(const vector<Image>& images) {
     this->images = images;
@@ -100,7 +100,7 @@ char NeuroNetwork::NeuronCalculate(const vector<char>& neuros, int i) {
 
 void NeuroNetwork::Image::Read(string filename, int n, int m) {
     neuros.resize(n*m);
-    ifstream input(filename);
+    ifstream input(filename.c_str());
     input >> name;
     string temp;
     for (int i = 0; i < n; i++) {
@@ -113,9 +113,10 @@ void NeuroNetwork::Image::Read(string filename, int n, int m) {
     input.close();
 }
 
-void NeuroNetwork::Image::Save(string filename, int n, int m) {
-    if (neuros.size() != n*m) return;
-    ofstream output(filename);
+bool NeuroNetwork::Image::Save(string filename, int n, int m) {
+    if (neuros.size() != n*m) return 0;
+    ofstream output(filename.c_str());
+    if(!output.is_open()) return 0;
     output << name;
     output << "\n";
     for (int i = 0; i < n; i++) {
@@ -127,4 +128,9 @@ void NeuroNetwork::Image::Save(string filename, int n, int m) {
         output << "\n";
     }
     output.close();
+    return 1;
+}
+
+bool NeuroNetwork::isLearnt(){
+    return (M != 0);
 }
